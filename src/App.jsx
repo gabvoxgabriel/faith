@@ -15,7 +15,7 @@ const Page = React.forwardRef((props, ref) => {
 
 export default function App() {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [introStep, setIntroStep] = useState(0); // 0: Checkpoint, 1: Welcome, 2: Book
+  const [introStep, setIntroStep] = useState(0); 
   const [passwordInput, setPasswordInput] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   
@@ -26,13 +26,13 @@ export default function App() {
   useEffect(() => {
     const fetchAudio = async () => {
       try {
-        const response = await fetch('/assets/audio/bg-music.mp3'); 
+        const response = await fetch('./assets/audio/bg-music.mp3'); 
         const blob = await response.blob();
         setAudioUrl(URL.createObjectURL(blob));
         setIsLoaded(true);
       } catch (error) {
         console.error("Audio failed to load", error);
-        setIsLoaded(true); // Failsafe
+        setIsLoaded(true); 
       }
     };
     fetchAudio();
@@ -41,7 +41,6 @@ export default function App() {
 
   const handleVerify = (e) => {
     e.preventDefault();
-    // Normalizes input by removing spaces and making it lowercase
     const normalizedInput = passwordInput.toLowerCase().replace(/\s/g, '');
     
     if (normalizedInput === 'wonderfulfaith') {
@@ -103,7 +102,6 @@ export default function App() {
             exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
             transition={{ duration: 1.2, ease: "easeInOut" }}
           >
-            {/* STEP 0: Security Checkpoint */}
             {introStep === 0 && (
               <motion.div 
                 className="checkpoint-card"
@@ -130,7 +128,6 @@ export default function App() {
               </motion.div>
             )}
 
-            {/* STEP 1: Initialization / Journey */}
             {introStep === 1 && (
               <motion.div 
                 className="journey-screen"
@@ -155,7 +152,6 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* STEP 2: The Book */}
       {introStep === 2 && (
         <motion.div 
           className="book-wrapper"
@@ -174,73 +170,76 @@ export default function App() {
             <div className="swipe-arrow">→</div>
           </motion.div>
 
-          <HTMLFlipBook 
-            width={450} 
-            height={600} 
-            size="stretch"
-            minWidth={300}
-            maxWidth={500}
-            minHeight={400}
-            maxHeight={700}
-            showCover={true}
-            maxShadowOpacity={0.5}
-            className="birthday-book"
-            onFlip={handlePageFlip} 
-          >
-            <Page isCover={true}>
-              <div className="hardcover front text-cover-layout">
-                <div className="cover-ornament">✧</div>
-                <h1 className="cover-title-main">To The Extraordinary<br/>Wonderful Faith</h1>
-                <p className="cover-subtitle">A Celebration of You</p>
-                <div className="cover-ornament bottom">✧</div>
-              </div>
-            </Page>
-            <Page>
-              <div className="page-text">
-                <h3>Dear Wonderful Faith,</h3>
-                <p>Some people make ordinary days feel like little celebrations. You have always been that kind of person to me: warm, genuine, and wonderfully impossible to forget.</p>
-                <p>Today is a good excuse to remind you how much joy you bring wherever you go.</p>
-              </div>
-            </Page>
-            <Page>
-              <div className="photo-page"><div className="photo-frame"><img src="/assets/images/photo1.jpg.png" alt="Memory 1" className="inner-image" /></div></div>
-            </Page>
-            <Page>
-              <div className="page-text">
-                <h3>Here is the truth:</h3>
-                <p>You make kindness look effortless. You listen with your whole heart, laugh in a way that makes everyone else join in, and somehow make every room feel more like home.</p>
-              </div>
-            </Page>
-            <Page>
-              <div className="photo-page"><div className="photo-frame"><img src="/assets/images/photo2.jpg.png" alt="Memory 2" className="inner-image" /></div></div>
-            </Page>
-            <Page>
-              <div className="page-text">
-                <h3>For the year ahead,</h3>
-                <p>May you find more reasons to laugh until your cheeks hurt, more places that feel like home, and more mornings that make you excited to get up and begin.</p>
-              </div>
-            </Page>
-            <Page>
-              <div className="photo-page"><div className="photo-frame"><img src="/assets/images/photo3.jpg.png" alt="Memory 3" className="inner-image" /></div></div>
-            </Page>
-            <Page>
-              <div className="page-text">
-                <h3>One last thing...</h3>
-                <p>Thank you for being exactly who you are. The world is brighter, funnier, and much more beautiful with you in it.</p>
-              </div>
-            </Page>
-            <Page>
-              <div className="photo-page"><div className="photo-frame"><img src="/assets/images/photo4.jpg.png" alt="Memory 4" className="inner-image" /></div></div>
-            </Page>
-            <Page isCover={true}>
-              <div className="hardcover back text-cover-layout">
-                <div className="cover-ornament">✧</div>
-                <h1 className="cover-title-main">Happy Birthday.</h1>
-                <p className="cover-subtitle">Make it unforgettable.</p>
-                <div className="cover-ornament bottom">✧</div>
-              </div>
-            </Page>
-          </HTMLFlipBook>
+          {/* responsive wrapper container */}
+          <div className="book-scale-container">
+            <HTMLFlipBook 
+              width={400} 
+              height={550} 
+              size="stretch"
+              minWidth={280}
+              maxWidth={450}
+              minHeight={400}
+              maxHeight={600}
+              showCover={true}
+              maxShadowOpacity={0.5}
+              className="birthday-book"
+              onFlip={handlePageFlip} 
+            >
+              <Page isCover={true}>
+                <div className="hardcover front text-cover-layout">
+                  <div className="cover-ornament">✧</div>
+                  <h1 className="cover-title-main">To The Extraordinary<br/>Wonderful Faith</h1>
+                  <p className="cover-subtitle">A Celebration of You</p>
+                  <div className="cover-ornament bottom">✧</div>
+                </div>
+              </Page>
+              <Page>
+                <div className="page-text">
+                  <h3>Dear Wonderful Faith,</h3>
+                  <p>Some people make ordinary days feel like little celebrations. You have always been that kind of person to me: warm, genuine, and wonderfully impossible to forget.</p>
+                  <p>Today is a good excuse to remind you how much joy you bring wherever you go.</p>
+                </div>
+              </Page>
+              <Page>
+                <div className="photo-page"><div className="photo-frame"><img src="./assets/images/photo1.jpg" alt="Memory 1" className="inner-image" /></div></div>
+              </Page>
+              <Page>
+                <div className="page-text">
+                  <h3>Here is the truth:</h3>
+                  <p>You make kindness look effortless. You listen with your whole heart, laugh in a way that makes everyone else join in, and somehow make every room feel more like home.</p>
+                </div>
+              </Page>
+              <Page>
+                <div className="photo-page"><div className="photo-frame"><img src="./assets/images/photo2.jpg" alt="Memory 2" className="inner-image" /></div></div>
+              </Page>
+              <Page>
+                <div className="page-text">
+                  <h3>For the year ahead,</h3>
+                  <p>May you find more reasons to laugh until your cheeks hurt, more places that feel like home, and more mornings that make you excited to get up and begin.</p>
+                </div>
+              </Page>
+              <Page>
+                <div className="photo-page"><div className="photo-frame"><img src="./assets/images/photo3.jpg" alt="Memory 3" className="inner-image" /></div></div>
+              </Page>
+              <Page>
+                <div className="page-text">
+                  <h3>One last thing...</h3>
+                  <p>Thank you for being exactly who you are. The world is brighter, funnier, and much more beautiful with you in it.</p>
+                </div>
+              </Page>
+              <Page>
+                <div className="photo-page"><div className="photo-frame"><img src="./assets/images/photo4.jpg" alt="Memory 4" className="inner-image" /></div></div>
+              </Page>
+              <Page isCover={true}>
+                <div className="hardcover back text-cover-layout">
+                  <div className="cover-ornament">✧</div>
+                  <h1 className="cover-title-main">Happy Birthday.</h1>
+                  <p className="cover-subtitle">Make it unforgettable.</p>
+                  <div className="cover-ornament bottom">✧</div>
+                </div>
+              </Page>
+            </HTMLFlipBook>
+          </div>
         </motion.div>
       )}
     </div>
