@@ -1,0 +1,475 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Space+Mono:wght@400;700&display=swap');
+
+/* =========================================
+   THE NOTEBOOK INTRO SEQUENCE
+   ========================================= */
+.intro-sequence {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.notebook-bg {
+  background-color: #111;
+  /* Creates the horizontal lines and the red margin line */
+  background-image: 
+    linear-gradient(90deg, transparent 10%, #873636 10%, #873636 10.3%, transparent 10.3%),
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 100% 40px;
+}
+
+.marker-font {
+  font-family: 'Permanent Marker', cursive;
+  letter-spacing: 2px;
+}
+
+.mono-font {
+  font-family: 'Space Mono', monospace;
+}
+
+/* Checkpoint Card Styles */
+.checkpoint-card {
+  background: #1a1a1a;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: center;
+}
+
+.checkpoint-card h2 {
+  color: #fff;
+  font-size: 1.8rem;
+  margin-bottom: 5px;
+}
+
+.checkpoint-card .subtitle {
+  color: #666;
+  font-size: 0.85rem;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+}
+
+.checkpoint-card .question {
+  color: #ccc;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.input-group input {
+  background: #0f0f0f;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 12px 15px;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  width: 200px;
+  transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+  border-color: #ef8b78;
+}
+
+.btn-verify {
+  background: #eaeaea;
+  color: #111;
+  border: none;
+  padding: 0 25px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-verify:hover {
+  opacity: 0.8;
+}
+
+.error-msg {
+  color: #e55353;
+  margin-top: 15px;
+  font-size: 0.85rem;
+}
+
+/* Journey Screen Styles */
+.journey-screen {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.initializing {
+  color: #666;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+}
+
+.huge-text {
+  font-size: clamp(4rem, 8vw, 6rem);
+  color: #ffbc9b;
+  margin: 0;
+  text-shadow: 2px 4px 15px rgba(255, 188, 155, 0.2);
+}
+
+.italic-sub {
+  color: #ef8b78;
+  font-style: italic;
+  font-size: 1.2rem;
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+
+.btn-journey {
+  background: #eaeaea;
+  color: #111;
+  font-family: 'Space Mono', monospace;
+  font-weight: bold;
+  padding: 15px 35px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-journey.ready:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+.btn-journey:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  /* Rich, warm ambient background instead of flat black */
+  background: radial-gradient(circle at 50% 50%, #3e2f38 0%, #17131d 100%);
+  color: #333;
+  font-family: 'DM Sans', sans-serif;
+  overflow: hidden;
+}
+
+.app-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* =========================================
+   THE ENTRY SCREEN (FROSTED GLASS INVITATION)
+   ========================================= */
+.entry-screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.invitation-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(15px); /* Frosted glass effect */
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
+
+.card-border {
+  border: 1px solid #ef8b78;
+  border-radius: 8px;
+  padding: 50px 60px;
+  text-align: center;
+}
+
+.card-border h1 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 3.5rem;
+  color: #fffaf4;
+  margin-bottom: 15px;
+}
+
+.divider {
+  height: 2px;
+  width: 60px;
+  background: #ef8b78;
+  margin: 0 auto 20px auto;
+}
+
+.card-border p {
+  color: #d9cbd0;
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  font-style: italic;
+}
+
+.open-button {
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  background: transparent;
+  color: #fffaf4;
+  border: 2px solid #ef8b78;
+  border-radius: 4px;
+  cursor: pointer;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.4s ease;
+}
+
+.open-button.ready {
+  background: #ef8b78;
+  color: #17131d;
+  box-shadow: 0 0 20px rgba(239, 139, 120, 0.4);
+}
+
+.open-button.ready:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(239, 139, 120, 0.6);
+}
+
+/* =========================================
+   THE REALISTIC BOOK STYLING
+   ========================================= */
+.book-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  /* Adds a shadow underneath the entire book */
+  filter: drop-shadow(0 30px 40px rgba(0,0,0,0.6)); 
+}
+
+.birthday-book {
+  border-radius: 4px;
+}
+
+/* Base Page Styling */
+.demoPage {
+  background-color: #fcf9f2; /* Realistic paper color */
+  position: relative;
+  overflow: hidden;
+}
+
+/* The Spine Shadow (Creates the illusion of pages folding into the center) */
+.page-spine-shadow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  background: linear-gradient(to right, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0) 100%);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Inner Text Pages */
+.page-text {
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.page-text h3 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2.2rem;
+  color: #71364f;
+  margin-bottom: 25px;
+}
+
+.page-text p {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  color: #4a3b42;
+}
+
+/* Photo Pages */
+.photo-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 30px;
+  background-color: #fcf9f2;
+}
+
+/* Makes the inner photos look printed on the page rather than taking up the whole screen */
+.photo-frame {
+  width: 100%;
+  height: 90%;
+  padding: 15px;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border: 1px solid #eaeaea;
+}
+
+.inner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =========================================
+   HARDCOVER STYLING (Pages 1 and 8)
+   ========================================= */
+.hardcover {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: #2b2028; /* Dark, rich cover material */
+  border-radius: 2px;
+}
+
+.cover-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+}
+
+.cover-title {
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: #fffaf4;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+}
+
+.final-page {
+  background-color: #2b2028;
+  color: white;
+  text-align: center;
+}
+
+.final-page h3, .final-page p { color: #d9cbd0; }
+.final-page h4 { margin-top: 40px; font-size: 2rem; color: #ef8b78; font-family: "Cormorant Garamond", serif; }
+
+/* =========================================
+   SIDE MESSAGE & NEW COVER STYLES
+   ========================================= */
+
+/* Positions the side text on the left without pushing the book */
+.book-wrapper {
+  position: relative;
+}
+
+.side-message {
+  position: absolute;
+  left: -320px; /* Adjust this if it's too close/far from the book */
+  top: 50%;
+  transform: translateY(-50%) !important;
+  width: 280px;
+  text-align: right;
+  color: #fffaf4;
+  z-index: 0;
+}
+
+.side-message h2 {
+  font-size: 2.4rem;
+  color: #ef8b78;
+  margin-bottom: 15px;
+  font-family: "Cormorant Garamond", serif;
+  line-height: 1;
+}
+
+.side-message p {
+  font-size: 1.1rem;
+  color: #d9cbd0;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.swipe-arrow {
+  font-size: 2rem;
+  color: #ef8b78;
+  animation: bounceRight 2s infinite;
+}
+
+@keyframes bounceRight {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(15px); }
+}
+
+/* Typographic Cover Layout */
+.text-cover-layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  text-align: center;
+  background: #2b2028;
+  border: 4px double #71364f; /* Adds a classic book border */
+  margin: 10px;
+  height: calc(100% - 20px);
+  width: calc(100% - 20px);
+}
+
+.cover-title-main {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 3.2rem;
+  color: #ef8b78;
+  line-height: 1.1;
+  margin: 20px 0;
+}
+
+.cover-subtitle {
+  font-size: 1.1rem;
+  color: #d9cbd0;
+  font-style: italic;
+}
+
+.cover-ornament {
+  font-size: 2rem;
+  color: #71364f;
+}
+
+/* Back Cover Final Photo Overlay */
+.final-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(43, 32, 40, 0.9) 0%, rgba(43, 32, 40, 0.2) 60%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 40px;
+  text-align: center;
+}
+
+.final-overlay h4 {
+  color: #ef8b78;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2.2rem;
+  line-height: 1.2;
+}
+
+/* Mobile Fix for side text */
+@media (max-width: 1000px) {
+  .side-message { display: none; }
+}
