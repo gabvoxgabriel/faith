@@ -349,8 +349,10 @@ body {
   50% { transform: translateX(12px); }
 }
 
-/* Mobile Adjustments to prevent cropping */
+/* Mobile Adjustments to prevent cropping and maximize size */
 @media (max-width: 1100px) {
-  .side-message { display: none; } /* Hides side text on phones so the book scales full screen */
-  .book-wrapper { padding: 5px; }
+  .side-message { display: none; }
+  .book-wrapper { padding: 0px; }
+  .book-scale-container { width: 100vw; height: 100vh; }
+  .page-text { padding: 25px; } /* Slightly less text padding for mobile */
 }

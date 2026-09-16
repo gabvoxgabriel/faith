@@ -170,21 +170,22 @@ export default function App() {
             <div className="swipe-arrow">→</div>
           </motion.div>
 
-          {/* responsive wrapper container */}
           <div className="book-scale-container">
             <HTMLFlipBook 
-              width={400} 
-              height={550} 
+              width={420} 
+              height={600} 
               size="stretch"
-              minWidth={280}
-              maxWidth={450}
-              minHeight={400}
-              maxHeight={600}
+              minWidth={315} 
+              maxWidth={550}
+              minHeight={450}
+              maxHeight={750}
               showCover={true}
+              usePortrait={true}
               maxShadowOpacity={0.5}
               className="birthday-book"
               onFlip={handlePageFlip} 
             >
+              {/* PAGE 1: COVER */}
               <Page isCover={true}>
                 <div className="hardcover front text-cover-layout">
                   <div className="cover-ornament">✧</div>
@@ -193,43 +194,70 @@ export default function App() {
                   <div className="cover-ornament bottom">✧</div>
                 </div>
               </Page>
+
+              {/* PAGE 2: MESSAGE 1 */}
               <Page>
                 <div className="page-text">
                   <h3>Dear Wonderful Faith,</h3>
-                  <p>Some people make ordinary days feel like little celebrations. You have always been that kind of person to me: warm, genuine, and wonderfully impossible to forget.</p>
-                  <p>Today is a good excuse to remind you how much joy you bring wherever you go.</p>
+                  <p>Today is your birthday, and I want to make sure you know just how much you mean to me. You are so much more than a friend; you are a constant source of strength, my truest confidante, and one of the most genuine people I know.</p>
+                  <p>I am incredibly proud of the woman you are. Our bond is built on shared laughter and unwavering support, and I wouldn't trade it for anything.</p>
+                  <p>You don't just brighten ordinary days, you bring a vital and undeniable joy to everyone around you. As you celebrate today and step into this new year, I want you to remember how deeply you are loved and cherished.</p>
                 </div>
               </Page>
+
+              {/* PAGE 3: PHOTO 1 */}
               <Page>
                 <div className="photo-page"><div className="photo-frame"><img src="./assets/images/photo1.jpg" alt="Memory 1" className="inner-image" /></div></div>
               </Page>
+
+              {/* PAGE 4: MESSAGE 2 */}
               <Page>
                 <div className="page-text">
-                  <h3>Here is the truth:</h3>
-                  <p>You make kindness look effortless. You listen with your whole heart, laugh in a way that makes everyone else join in, and somehow make every room feel more like home.</p>
+                  <h3>Here is the beautiful truth about you:</h3>
+                  <p>You pour out kindness so naturally, making it look entirely effortless. When you listen, you do it with your whole soul, making those around you feel truly seen and deeply understood.</p>
+                  <p>And your laugh is pure magic, a contagious joy that brings light to everyone lucky enough to hear it. But your rarest, most wonderful gift is the comfort you offer just by being yourself. You have this incredible ability to make every single room you walk into feel safe, warm, and instantly like home.</p>
                 </div>
               </Page>
+
+              {/* PAGE 5: PHOTO 2 */}
               <Page>
                 <div className="photo-page"><div className="photo-frame"><img src="./assets/images/photo2.jpg" alt="Memory 2" className="inner-image" /></div></div>
               </Page>
+
+              {/* PAGE 6: MESSAGE 3 */}
               <Page>
                 <div className="page-text">
-                  <h3>For the year ahead,</h3>
-                  <p>May you find more reasons to laugh until your cheeks hurt, more places that feel like home, and more mornings that make you excited to get up and begin.</p>
+                  <h3>For the beautiful year ahead,</h3>
+                  <p>My greatest wish is that your world is filled with as much joy as you give to others. May you find countless new reasons to laugh until your cheeks ache with happiness.</p>
+                  <p>I hope you discover even more spaces that wrap around you and offer the warm, safe comfort of home. Most of all, I wish you a year of bright, beautiful mornings that fill your soul with so much excitement, you simply can't wait to wake up and begin the day.</p>
                 </div>
               </Page>
+
+              {/* PAGE 7: PHOTO 3 */}
               <Page>
                 <div className="photo-page"><div className="photo-frame"><img src="./assets/images/photo3.jpg" alt="Memory 3" className="inner-image" /></div></div>
               </Page>
+
+              {/* PAGE 8: MESSAGE 4 (The Finale) */}
               <Page>
                 <div className="page-text">
                   <h3>One last thing...</h3>
-                  <p>Thank you for being exactly who you are. The world is brighter, funnier, and much more beautiful with you in it.</p>
+                  <p>Thank you for being exactly who you are. The world is infinitely brighter, way funnier, and so much more beautiful with you in it. I am so incredibly grateful that God crossed our paths and placed you in my life.</p>
+                  <p>You might not be my biological sister, but you are absolutely a sister to me. Walking through life with you, sharing our faith, praying for one another, having those wonderful long talks, and cracking up at the most random things, is one of my greatest blessings.</p>
+                  <p style={{ marginTop: '10px', color: '#71364f', fontWeight: '600', fontStyle: 'italic' }}>
+                    Have the most amazing birthday, because you deserve every bit of it!<br/><br/>
+                    With so much love and blessings,<br/>
+                    Gabvox
+                  </p>
                 </div>
               </Page>
+
+              {/* PAGE 9: PHOTO 4 */}
               <Page>
                 <div className="photo-page"><div className="photo-frame"><img src="./assets/images/photo4.jpg" alt="Memory 4" className="inner-image" /></div></div>
               </Page>
+
+              {/* PAGE 10: BACK COVER */}
               <Page isCover={true}>
                 <div className="hardcover back text-cover-layout">
                   <div className="cover-ornament">✧</div>
