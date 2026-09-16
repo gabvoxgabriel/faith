@@ -18,6 +18,7 @@ export default function App() {
   const [introStep, setIntroStep] = useState(0); 
   const [passwordInput, setPasswordInput] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
+  const [isBookClosed, setIsBookClosed] = useState(false); // NEW: Tracks if she reached the end
   
   const [audioUrl, setAudioUrl] = useState(null);
   const audioRef = useRef(null);
@@ -63,9 +64,17 @@ export default function App() {
 
   const handlePageFlip = (e) => {
     const pageIndex = e.data;
+    
     if (infiniteGlitterRef.current) {
       clearInterval(infiniteGlitterRef.current);
       infiniteGlitterRef.current = null;
+    }
+
+    // Trigger end animation if she reaches the back cover (page 9)
+    if (pageIndex === 9) {
+      setTimeout(() => setIsBookClosed(true), 600); // Tiny delay so she sees the cover flip first
+    } else {
+      setIsBookClosed(false);
     }
 
     if (pageIndex >= 8) {
@@ -95,6 +104,42 @@ export default function App() {
 
   return (
     <div className="app-container">
+      {/* NEW: The Closing Love Animation Overlay */}
+      <AnimatePresence>
+        {isBookClosed && (
+          <motion.div 
+            className="closing-animation-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.5 }}
+          >
+            <motion.div 
+              className="heart-icon"
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut" }}
+            >
+              ❤️
+            </motion.div>
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 1.5 }}
+              className="marker-font end-name-text"
+            >
+              WONDERFUL FAITH
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 2, duration: 1 }}
+              className="mono-font end-subtext"
+            >
+              HAPPY BIRTHDAY
+            </motion.p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <AnimatePresence>
         {introStep < 2 && (
           <motion.div 
@@ -173,19 +218,18 @@ export default function App() {
           <div className="book-scale-container">
             <HTMLFlipBook 
               width={420} 
-              height={600} 
+              height={650} 
               size="stretch"
               minWidth={315} 
-              maxWidth={550}
-              minHeight={450}
-              maxHeight={750}
+              maxWidth={600}
+              minHeight={500}
+              maxHeight={950} /* INCREASED: Allows the book to stretch all the way up and down on phones */
               showCover={true}
               usePortrait={true}
               maxShadowOpacity={0.5}
               className="birthday-book"
               onFlip={handlePageFlip} 
             >
-              {/* PAGE 1: COVER */}
               <Page isCover={true}>
                 <div className="hardcover front text-cover-layout">
                   <div className="cover-ornament">✧</div>
@@ -195,7 +239,6 @@ export default function App() {
                 </div>
               </Page>
 
-              {/* PAGE 2: MESSAGE 1 */}
               <Page>
                 <div className="page-text">
                   <h3>Dear Wonderful Faith,</h3>
@@ -205,12 +248,10 @@ export default function App() {
                 </div>
               </Page>
 
-              {/* PAGE 3: PHOTO 1 */}
               <Page>
                 <div className="photo-page"><div className="photo-frame"><img src="./assets/images/photo1.jpg" alt="Memory 1" className="inner-image" /></div></div>
               </Page>
 
-              {/* PAGE 4: MESSAGE 2 */}
               <Page>
                 <div className="page-text">
                   <h3>Here is the beautiful truth about you:</h3>
@@ -219,12 +260,10 @@ export default function App() {
                 </div>
               </Page>
 
-              {/* PAGE 5: PHOTO 2 */}
               <Page>
                 <div className="photo-page"><div className="photo-frame"><img src="./assets/images/photo2.jpg" alt="Memory 2" className="inner-image" /></div></div>
               </Page>
 
-              {/* PAGE 6: MESSAGE 3 */}
               <Page>
                 <div className="page-text">
                   <h3>For the beautiful year ahead,</h3>
@@ -233,12 +272,10 @@ export default function App() {
                 </div>
               </Page>
 
-              {/* PAGE 7: PHOTO 3 */}
               <Page>
                 <div className="photo-page"><div className="photo-frame"><img src="./assets/images/photo3.jpg" alt="Memory 3" className="inner-image" /></div></div>
               </Page>
 
-              {/* PAGE 8: MESSAGE 4 (The Finale) */}
               <Page>
                 <div className="page-text">
                   <h3>One last thing...</h3>
@@ -252,12 +289,10 @@ export default function App() {
                 </div>
               </Page>
 
-              {/* PAGE 9: PHOTO 4 */}
               <Page>
                 <div className="photo-page"><div className="photo-frame"><img src="./assets/images/photo4.jpg" alt="Memory 4" className="inner-image" /></div></div>
               </Page>
 
-              {/* PAGE 10: BACK COVER */}
               <Page isCover={true}>
                 <div className="hardcover back text-cover-layout">
                   <div className="cover-ornament">✧</div>
