@@ -18,7 +18,7 @@ export default function App() {
   const [introStep, setIntroStep] = useState(0); 
   const [passwordInput, setPasswordInput] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
-  const [isBookClosed, setIsBookClosed] = useState(false); // NEW: Tracks if she reached the end
+  const [isBookClosed, setIsBookClosed] = useState(false); 
   
   const [audioUrl, setAudioUrl] = useState(null);
   const audioRef = useRef(null);
@@ -70,9 +70,8 @@ export default function App() {
       infiniteGlitterRef.current = null;
     }
 
-    // Trigger end animation if she reaches the back cover (page 9)
     if (pageIndex === 9) {
-      setTimeout(() => setIsBookClosed(true), 600); // Tiny delay so she sees the cover flip first
+      setTimeout(() => setIsBookClosed(true), 600); 
     } else {
       setIsBookClosed(false);
     }
@@ -104,22 +103,25 @@ export default function App() {
 
   return (
     <div className="app-container">
-      {/* NEW: The Closing Love Animation Overlay */}
       <AnimatePresence>
         {isBookClosed && (
           <motion.div 
             className="closing-animation-overlay"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1.5 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsBookClosed(false)} 
           >
-            <motion.div 
-              className="heart-icon"
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut" }}
-            >
-              ❤️
-            </motion.div>
+            {/* The Empty, Glowing Outline Heart Animation */}
+            <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#ef8b78" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="glowing-heart-svg">
+              <motion.path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 2, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+              />
+            </svg>
+
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -128,13 +130,23 @@ export default function App() {
             >
               WONDERFUL FAITH
             </motion.h1>
+            
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 2, duration: 1 }}
+              transition={{ delay: 1.5, duration: 1 }}
               className="mono-font end-subtext"
             >
               HAPPY BIRTHDAY
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 3, duration: 1 }}
+              className="mono-font tap-to-close"
+            >
+              (Tap anywhere to go back)
             </motion.p>
           </motion.div>
         )}
@@ -223,7 +235,7 @@ export default function App() {
               minWidth={315} 
               maxWidth={600}
               minHeight={500}
-              maxHeight={950} /* INCREASED: Allows the book to stretch all the way up and down on phones */
+              maxHeight={950} 
               showCover={true}
               usePortrait={true}
               maxShadowOpacity={0.5}
@@ -284,7 +296,7 @@ export default function App() {
                   <p style={{ marginTop: '10px', color: '#71364f', fontWeight: '600', fontStyle: 'italic' }}>
                     Have the most amazing birthday, because you deserve every bit of it!<br/><br/>
                     With so much love and blessings,<br/>
-                    Gabvox
+                    Gabvox Gabriel
                   </p>
                 </div>
               </Page>
